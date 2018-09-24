@@ -202,3 +202,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+/PG2-EJ1/external/glm-0.9.9.0/doc/api/*.html
+/PG2-EJ1/external/glfw-3.2.1/docs/html/*.html
+/PG2-EJ1/external/glm-0.9.9.0/doc/api/search/*.html
+*.html
