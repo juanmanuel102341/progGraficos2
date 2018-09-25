@@ -41,6 +41,12 @@ void Game::OnDraw() {
 bool Game::OnUpdate() {
 	i++;
 	std::cout << "Game: OnUpdate: "<<i << std::endl;
+	//triangle->SetMoveX(0.002f);
+	//triangle->SetMoveY(-0.002f);
+	//triangle->SetRotX(1.0f);
+	//triangle->SetRotY(1.0f);
+	triangle->SetRotZ(0.2f);
+	triangle2->SetMoveX(0.002f);
 	
 	if (i >= 5) {
 		return false;

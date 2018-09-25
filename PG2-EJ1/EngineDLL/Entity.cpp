@@ -32,7 +32,7 @@ void Entity::SetRotX(float angle){
 	axis[0] = 1;
 	axis[1] = 0;
 	axis[2] = 0;
-	matrizRotX=glm::rotate(glm::mat4(1.0f), angle, axis);
+	matrizRotX=glm::rotate(matrizRotX, glm::radians(angle), axis);
 	UpdateMatrix();
 
 }
@@ -41,7 +41,7 @@ void Entity::SetRotY(float angle) {
 	axis[0] = 0;
 	axis[1] = 1;
 	axis[2] = 0;
-	matrizRotacionY = glm::rotate(glm::mat4(1.0f), angle, axis);
+	matrizRotacionY = glm::rotate(matrizRotacionY, glm::radians(angle), axis);
 	UpdateMatrix();
 
 }
@@ -50,11 +50,26 @@ void Entity::SetRotZ(float angle) {
 	axis[0] = 0;
 	axis[1] = 0;
 	axis[2] = 1;
-	matrizRotX = glm::rotate(glm::mat4(1.0f), angle, axis);
+	matrizRotacionZ = glm::rotate(matrizRotacionZ, glm::radians(angle), axis);
 	UpdateMatrix();
 
 }
-
+void Entity::SetMoveX(float velocity) {
+	glm::vec3 axis;
+	axis[0] = velocity;
+	axis[1] = 0;
+	axis[2] = 0;
+	matrizTraslacion=glm::translate(matrizTraslacion, axis);
+	UpdateMatrix();
+}
+void Entity::SetMoveY(float velocity) {
+	glm::vec3 axis;
+	axis[0] = 0;
+	axis[1] = velocity;
+	axis[2] = 0;
+	matrizTraslacion = glm::translate(matrizTraslacion, axis);
+	UpdateMatrix();
+}
 void Entity::SetMaterial(Material* _material) {
 	material = _material;
 }
