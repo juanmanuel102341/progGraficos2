@@ -23,7 +23,11 @@ public:
 	void ClearScreen();
 	void SwappBuffer();
 	unsigned int SetBufferData(float vertices[],int size );
-	void Draw(unsigned int buffer, int tam);
+	
+	void BeginDraw(int id);
+	void BindBuffer(unsigned int buffer,int id,char* num2);
+	void DrawBuffer(int tam);
+	void EndDraw(int id);
 	unsigned int LoadShader(const char * vertex_file_path, const char * fragment_file_path);
 	void Bind(unsigned int idPorgram);
 	void DeleteShader(unsigned int id);

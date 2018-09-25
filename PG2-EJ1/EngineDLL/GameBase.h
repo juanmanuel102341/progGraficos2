@@ -5,6 +5,7 @@
  #include <iostream>
 #include"Entity.h"
 #include"Triangle.h"
+#include"ColorShape.h"
 #include"Material.h"
 class ENGINEDLL_API GameBase {
 

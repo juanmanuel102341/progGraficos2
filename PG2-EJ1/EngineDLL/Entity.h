@@ -28,7 +28,7 @@ public:
 	void SetMaterial(Material* material);
 public:
 	unsigned int vertexBuffer;
-
+	//unsigned int bufferColor;
 private:
 	glm::vec3 verticesM;
 	glm::mat4 matrizTraslacion;

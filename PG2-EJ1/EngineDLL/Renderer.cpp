@@ -81,14 +81,21 @@ unsigned int Renderer::SetBufferData(float vertices[],int size) {
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	return buffer;
 }
-void Renderer::Draw(unsigned int buffer, int tam) {
 
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	glDrawArrays(GL_TRIANGLES, 0, tam);
-	glDisableVertexAttribArray(0);
+void Renderer::BeginDraw(int id) {
+	glEnableVertexAttribArray(id);
 }
+void Renderer::BindBuffer(unsigned int buffer,int id,char* num2) {
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glVertexAttribPointer(id, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, num2);
+}
+void Renderer::DrawBuffer(int tam) {
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, tam);
+}
+void Renderer::EndDraw(int id) {
+	glDisableVertexAttribArray(id);
+}
+
 unsigned int Renderer::LoadShader(const char * vertex_file_path, const char * fragment_file_path) {
 	// Create the shaders
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);

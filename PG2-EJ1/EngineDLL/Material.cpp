@@ -15,6 +15,7 @@ void Material::SetMatrixMaterial(glm::mat4 &mat) {
 	matrixId = glGetUniformLocation(programId, "MVP");
 	glUniformMatrix4fv(matrixId, 1, GL_FALSE, &mat[0][0]);
 }
+
 void Material::Stop() {
 	renderer->DeleteShader(programId);
 }
