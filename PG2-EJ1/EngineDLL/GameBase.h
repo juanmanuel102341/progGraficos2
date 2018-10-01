@@ -7,6 +7,8 @@
 #include"Triangle.h"
 #include"ColorShape.h"
 #include"Material.h"
+#include"Shape.h"
+#include"Circle.h"
 class ENGINEDLL_API GameBase {
 
 protected:

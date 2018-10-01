@@ -1,14 +1,14 @@
 #pragma once
-#include"Entity.h"
-class ENGINEDLL_API ColorShape: public Entity
+#include"Shape.h"
+class ENGINEDLL_API ColorShape: public Shape
 {
 public:
 	ColorShape(Renderer* renderer);
 	void Start() override;
-	void Draw()override;
+	
 	void Stop()override;
 
 private:
-	float* gvertices;
+	
 
 };

@@ -1,15 +1,15 @@
 #pragma once
-#include"Entity.h"
-class ENGINEDLL_API Triangle: public Entity
+#include"Shape.h"
+class ENGINEDLL_API Triangle: public Shape
 {
 public:
 	Triangle(Renderer* renderer);
 	 void Start() override;
-	 void Draw()override;
+	
 	 void Stop()override;
 	 
 	
-	 float* gvertices;
+	 
 private:
 	
 	

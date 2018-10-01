@@ -14,6 +14,9 @@ using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
+enum Primitive {
+	strip, fun
+};
 class ENGINEDLL_API Renderer {
 public:
 	bool Start();
@@ -26,7 +29,7 @@ public:
 	
 	void BeginDraw(int id);
 	void BindBuffer(unsigned int buffer,int id,char* num2);
-	void DrawBuffer(int tam);
+	void DrawBuffer(int tam,Primitive primitive);
 	void EndDraw(int id);
 	unsigned int LoadShader(const char * vertex_file_path, const char * fragment_file_path);
 	void Bind(unsigned int idPorgram);

@@ -27,7 +27,7 @@ public:
 	//~Entity();
 	void SetMaterial(Material* material);
 public:
-	unsigned int vertexBuffer;
+	
 	//unsigned int bufferColor;
 private:
 	glm::vec3 verticesM;

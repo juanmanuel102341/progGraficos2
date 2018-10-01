@@ -89,8 +89,19 @@ void Renderer::BindBuffer(unsigned int buffer,int id,char* num2) {
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 	glVertexAttribPointer(id, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, num2);
 }
-void Renderer::DrawBuffer(int tam) {
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, tam);
+void Renderer::DrawBuffer(int tam,Primitive prim) {
+	switch (prim)
+	{
+	case strip:
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, tam);
+		break;
+	case fun:
+		glDrawArrays(GL_TRIANGLE_FAN, 0, tam);
+		break;
+	default:
+		break;
+	}
+
 }
 void Renderer::EndDraw(int id) {
 	glDisableVertexAttribArray(id);
