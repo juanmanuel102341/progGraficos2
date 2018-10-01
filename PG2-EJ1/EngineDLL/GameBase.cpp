@@ -7,7 +7,7 @@ bool GameBase::Start() {
 
 	std::cout << "Gamebase: Start" << std::endl;;
 	bool good = true;
-	window = new Window(800, 600, "prueba");
+	window = new Window(800, 600, "motor sala");
 	renderer = new Renderer(window);
 	
 	if (!window->Start()) {

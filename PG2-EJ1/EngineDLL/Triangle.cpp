@@ -25,7 +25,7 @@ void Triangle::Draw() {
 	material->SetMatrixMaterial(renderer->GetMVP());//le paso la MVP al shader
 	renderer->BeginDraw(0);
 	renderer->BeginDraw(1);
-	renderer->BindBuffer(vertexBuffer, 1, (char*)(sizeof(float) * 3));
+	renderer->BindBuffer(vertexBuffer, 1, (char*)(sizeof(float) * 3));//le paso buffer, el id y el tama;o en bytes desde cuando empiezo a contar los vertices
 	renderer->BindBuffer(vertexBuffer,0,0);
 	renderer->DrawBuffer(3);
 	renderer->EndDraw(0);
