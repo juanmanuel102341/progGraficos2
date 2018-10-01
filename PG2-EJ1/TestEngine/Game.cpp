@@ -39,7 +39,8 @@ bool Game::OnStop() {
 	std::cout << "Game: Stop" << std::endl;
 	triangle->Stop();
 	triangle2->Stop();
-
+	colorShape->Stop();
+	circle->Stop();
 	return true;
 }
 void Game::OnDraw() {
