@@ -17,6 +17,8 @@ void Triangle::Start() {
 	vertexBuffer=renderer->SetBufferData(gvertices,size);
 	numberOfVertices = 3;
 	primitive = strip;
+	applyUv = false;
+	tam = 6;
 }
 
 

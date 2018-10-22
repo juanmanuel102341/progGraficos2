@@ -9,6 +9,7 @@ private:
 	Triangle* triangle2;
 	ColorShape* colorShape;
 	Circle* circle;
+	Sprite* sprite;
 protected:
 	bool OnStop() override;
 	bool OnStart() override;

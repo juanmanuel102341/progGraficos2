@@ -73,6 +73,7 @@ void Renderer::ClearScreen(){
 void Renderer::SwappBuffer(){
 	glfwSwapBuffers((GLFWwindow*)window->GetWindow());
 }
+
 unsigned int Renderer::SetBufferData(float vertices[],int size) {
 	
 	unsigned int buffer;
@@ -81,14 +82,28 @@ unsigned int Renderer::SetBufferData(float vertices[],int size) {
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	return buffer;
 }
-
+ unsigned int Renderer::GenTexture(int width, int height, unsigned char* data){
+	 unsigned int textureId;
+	 glGenTextures(1, &textureId);
+	 glBindTexture(GL_TEXTURE_2D, textureId);
+	 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	 //cout << "id textire renderer "<<textureId<<endl;
+	 return textureId;
+ 
+ }
+void Renderer::BindTexture(unsigned int idTexture) {
+	glBindTexture(GL_TEXTURE_2D, idTexture);
+ }
 void Renderer::BeginDraw(int id) {
 	glEnableVertexAttribArray(id);
 }
-void Renderer::BindBuffer(unsigned int buffer,int id,char* num2) {
+void Renderer::BindBuffer(unsigned int buffer,int id,int numberElements,int stride,char* offset) {
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glVertexAttribPointer(id, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, num2);
+	glVertexAttribPointer(id, numberElements, GL_FLOAT, GL_FALSE, sizeof(float)*stride, offset);
 }
+
 void Renderer::DrawBuffer(int tam,Primitive prim) {
 	switch (prim)
 	{

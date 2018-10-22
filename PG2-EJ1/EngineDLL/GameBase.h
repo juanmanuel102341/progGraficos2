@@ -9,16 +9,17 @@
 #include"Material.h"
 #include"Shape.h"
 #include"Circle.h"
+#include"Sprite.h"
 class ENGINEDLL_API GameBase {
 
 protected:
 	Renderer* renderer;
 	Material* material;
+	Material* materialSprite;
 private:
 	
 	Window* window;
-//	Entity* triangle;
-	
+
 protected:
 	virtual bool OnStart() = 0;
 	virtual bool OnStop() = 0;

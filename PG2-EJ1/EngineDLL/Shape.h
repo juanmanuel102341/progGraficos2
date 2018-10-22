@@ -6,8 +6,11 @@ class ENGINEDLL_API Shape: public Entity
 protected:
 	float* gvertices;
 	unsigned int vertexBuffer;
-	int numberOfVertices;
-	Primitive primitive;
+	int numberOfVertices;//para draw
+	Primitive primitive;//para draw
+	bool applyUv;
+	unsigned int idTexture;
+	int tam;
 public:
 	Shape(Renderer* renderer);
 	virtual void Start() = 0;

@@ -28,7 +28,8 @@ public:
 	unsigned int SetBufferData(float vertices[],int size );
 	
 	void BeginDraw(int id);
-	void BindBuffer(unsigned int buffer,int id,char* num2);
+	void BindBuffer(unsigned int buffer, int id, int numberElements, int stride, char* offset);
+	void BindTexture(unsigned int idText);
 	void DrawBuffer(int tam,Primitive primitive);
 	void EndDraw(int id);
 	unsigned int LoadShader(const char * vertex_file_path, const char * fragment_file_path);
@@ -40,6 +41,7 @@ public:
 	void SetModelMatriz(glm::mat4 _model);
 	~Renderer();
 	glm::mat4 GetMVP();
+	unsigned int GenTexture(int width,int height,unsigned char* data);
 private:
 	Window* window;
 	glm::mat4 matrizProyection;

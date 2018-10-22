@@ -31,6 +31,8 @@ void Circle::Start() {
 	vertexBuffer = renderer->SetBufferData(gvertices,size);
 	numberOfVertices = numberOfVerticesCircle;
 	primitive = fun;
+	applyUv = false;
+	tam = 6;
 }
 void Circle::Stop() {
 	material->Stop();

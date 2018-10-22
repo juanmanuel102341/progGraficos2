@@ -4,10 +4,13 @@ GameBase::GameBase() {
 }
 
 bool GameBase::Start() {
-	std::cout << "Gamebase: Start" << std::endl;;
+	std::cout << "Gamebase: Starts" << std::endl;
+	//std::cout << "prueba bmp" << std::endl;
 	bool good = true;
 	window = new Window(800, 600, "motor sala");
 	renderer = new Renderer(window);
+	
+	
 	if (!window->Start()) {
 		good = false;
 	}
@@ -15,7 +18,10 @@ bool GameBase::Start() {
 		good = false;
 	}
 	material = new Material(renderer);
-	material->LoadShader();
+	material->LoadShader(normal);
+	materialSprite = new Material(renderer);
+	materialSprite->LoadShader(sprite);
+	
 
 	if (!OnStart()) { 
 		good = false;
@@ -36,6 +42,8 @@ bool GameBase::Stop() {
 		good = false; 
 	}
 	delete renderer;
+	delete material;
+	delete materialSprite;
 	return good;
 }
 

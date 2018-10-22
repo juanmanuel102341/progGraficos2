@@ -9,16 +9,19 @@ void ColorShape::Start() {
 		1.0f,0.0f,0.0f,//color
 		0.5f, -0.5f, 0.0f,
 		0.0f,1.0f,0.0f,//color
-		-0.5f,  0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f,
 		0.0f,0.0f,1.0f,//color
 		0.5f,  0.5f, 0.0f,
 		1.0f,0.0f,0.0f,//color
+		
 	};
 	
 	int size = 3 * sizeof(float) * 8;
 	vertexBuffer = renderer->SetBufferData(gvertices, size);
 	numberOfVertices = 4;
 	primitive = strip;
+	applyUv = false;
+	tam = 6;
 //	bufferColor = renderer->SetBufferData(colorsVertices, size);
 }
 
