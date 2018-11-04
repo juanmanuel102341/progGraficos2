@@ -16,28 +16,40 @@ bool Game::OnStart() {
 	triangle2 = new Triangle(renderer);
 	colorShape = new ColorShape(renderer);
 	circle = new Circle(renderer);
-	sprite = new Sprite(renderer);
+	
+	avatar1 = new Avatar(renderer);
+	avatar2 = new Avatar(renderer);
 
 	triangle->SetMaterial(material);
 	triangle2->SetMaterial(material);
 	colorShape->SetMaterial(material);
 	circle->SetMaterial(material);
-	sprite->SetMaterial(materialSprite);
+	avatar1->SetMaterial(materialSprite);
+	avatar2->SetMaterial(materialSprite);
 
 	triangle->SetPos(5, 0, 0);
-	//triangle->SetScale(3.0f, 3.0f, 3.0f);
 	triangle2->SetPos(0, -5, 0);
 	colorShape->SetPos(7, 0, 0);
 	circle->SetPos(-5,5, 0);
-	sprite->SetPos(0, 0, 0);
-	
+	avatar1->SetPos(0, 0, 0);
+	avatar2->SetPos(0, 4, 0);
+
 	triangle->Start();
 	triangle2->Start();
 	colorShape->Start();
 	circle->Start();
-	sprite->LoadBmp("testFrame.bmp");
-	sprite->Start();
-	sprite->SetFrame(0);
+	avatar1->StartAvatar();
+	avatar2->StartAvatar();
+	
+	avatar1->LoadBmp("testFrame.bmp");
+	avatar1->SetFrame(0);
+	avatar2->LoadBmp("testFrame.bmp");
+	avatar2->SetFrame(0);
+
+	colisionManager->RegisterBoundingBox(avatar1->box, A);
+	colisionManager->RegisterBoundingBox(avatar2->box, B);
+
+	
 	return true;
 }
 
@@ -47,7 +59,8 @@ bool Game::OnStop() {
 	triangle2->Stop();
 	colorShape->Stop();
 	circle->Stop();
-	sprite->Stop();
+	avatar1->StopAvatar();
+	avatar2->StopAvatar();
 	return true;
 }
 void Game::OnDraw() {
@@ -55,7 +68,10 @@ void Game::OnDraw() {
 	triangle->Draw();
 	triangle2->Draw();
 	colorShape->Draw();
-	sprite->Draw();
+	//sprite->Draw();
+//	sprite2->Draw();
+	avatar1->Draw();
+	avatar2->Draw();
 }
 
 bool Game::OnUpdate() {
@@ -69,6 +85,14 @@ bool Game::OnUpdate() {
 	//triangle->SetRotZ(0.2f);
 	triangle2->SetRotZ(0.2f);
 	
+	
+	avatar1->UpdatePosition();
+	avatar2->UpdatePosition();
+	colisionManager->OnCheckCollision();
+	if (!avatar2->box->collide) {
+	
+		avatar2->SetMoveY(-0.002f);
+	}
 	if (i >= 5) {
 		return false;
 	} else {

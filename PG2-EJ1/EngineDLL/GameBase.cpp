@@ -21,11 +21,12 @@ bool GameBase::Start() {
 	material->LoadShader(normal);
 	materialSprite = new Material(renderer);
 	materialSprite->LoadShader(sprite);
-	
+	colisionManager = new ColisionManager;
 
 	if (!OnStart()) { 
 		good = false;
 	}
+	
 	return good;
 }
 
@@ -44,6 +45,7 @@ bool GameBase::Stop() {
 	delete renderer;
 	delete material;
 	delete materialSprite;
+//	delete colisionManager;
 	return good;
 }
 

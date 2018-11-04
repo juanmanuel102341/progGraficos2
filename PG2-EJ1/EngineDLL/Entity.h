@@ -11,6 +11,7 @@ protected:
 	Renderer* renderer;
 	Material* material;
 	glm::mat4 matrizModel;
+	
 public:
 	//	Entity();
 	Entity(Renderer* _renderer);
@@ -26,8 +27,9 @@ public:
 	void SetMoveY(float velocity);
 	//~Entity();
 	void SetMaterial(Material* material);
+
 public:
-	
+	float posX, posY;
 	//unsigned int bufferColor;
 private:
 	glm::vec3 verticesM;

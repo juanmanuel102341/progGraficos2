@@ -1,5 +1,5 @@
 #include"Entity.h"
-Entity::Entity(Renderer* _renderer):renderer(_renderer){
+Entity::Entity(Renderer* _renderer):renderer(_renderer),posX(0),posY(0){
 	
 	matrizTraslacion = glm::mat4(1.0f);
 	matrizRotX = glm::mat4(1.0f);
@@ -10,9 +10,11 @@ Entity::Entity(Renderer* _renderer):renderer(_renderer){
 void Entity::UpdateMatrix() {
 	matrizModel = matrizTraslacion*matrizRotX*matrizRotacionY*matrizRotacionZ*matrizScale;
 }
-void Entity::SetPos(float x, float y, float z) {
-	verticesM[0] = x;
-	verticesM[1] = y;
+void Entity::SetPos(float _x, float _y, float z) {
+	posX = _x;
+	posY = _y;
+	verticesM[0] = _x;
+	verticesM[1] = _y;
 	verticesM[2] = z;
 	
 	matrizTraslacion=glm::translate(glm::mat4(1.0f),verticesM);
@@ -55,14 +57,19 @@ void Entity::SetRotZ(float angle) {
 
 }
 void Entity::SetMoveX(float velocity) {
+	posX += velocity;
+	//cout << "posx " << posX << endl;
 	glm::vec3 axis;
 	axis[0] = velocity;
 	axis[1] = 0;
 	axis[2] = 0;
 	matrizTraslacion=glm::translate(matrizTraslacion, axis);
 	UpdateMatrix();
+
+	
 }
 void Entity::SetMoveY(float velocity) {
+	posY += velocity;
 	glm::vec3 axis;
 	axis[0] = 0;
 	axis[1] = velocity;

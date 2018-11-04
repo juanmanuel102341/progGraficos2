@@ -10,12 +10,15 @@
 #include"Shape.h"
 #include"Circle.h"
 #include"Sprite.h"
+#include"ColisionManager.h"
+#include"Avatar.h"
 class ENGINEDLL_API GameBase {
 
 protected:
 	Renderer* renderer;
 	Material* material;
 	Material* materialSprite;
+	ColisionManager* colisionManager;
 private:
 	
 	Window* window;

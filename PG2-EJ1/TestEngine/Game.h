@@ -9,7 +9,8 @@ private:
 	Triangle* triangle2;
 	ColorShape* colorShape;
 	Circle* circle;
-	Sprite* sprite;
+	Avatar* avatar1;
+	Avatar* avatar2;
 protected:
 	bool OnStop() override;
 	bool OnStart() override;

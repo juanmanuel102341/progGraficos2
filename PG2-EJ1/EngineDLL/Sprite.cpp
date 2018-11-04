@@ -27,6 +27,8 @@ void Sprite::Start() {
 	primitive = strip;
 	applyUv = true;
 	tam = 8;
+	widthSprite = abs(gvertices[8] - gvertices[0]);
+	heightSprite =abs( gvertices[17] - gvertices[1]);
 
 }
 void Sprite::LoadBmp(const char* imagePath) {

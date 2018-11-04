@@ -1,6 +1,8 @@
 #pragma once
 #include"Shape.h"
 #include"ImporterBmp.h"
+
+#include <cmath>        // std::abs
 class ENGINEDLL_API Sprite: public Shape
 {
 public:
@@ -10,9 +12,14 @@ public:
 	void Stop()override;
 	void SetFrame(int id);
 	void SetFrameValues();
+	int widthSprite;
+	int heightSprite;
+private:
+
 private:
 	int widthFrame;
 	int heightFrame;
+	
 	float x, y;
 
 	DataBmp data;
