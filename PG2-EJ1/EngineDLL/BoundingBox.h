@@ -3,6 +3,9 @@
 #include <iostream>     // std::cout
 #include <cmath>        // std::abs
 using namespace std;
+enum StateObjectBox {
+	fijoBox, movilBox,triggerBox
+};
 class ENGINEDLL_API BoundingBox
 {
 public:
@@ -12,9 +15,16 @@ public:
 	void UpdatePosition(float x, float y);
 public:
 	bool collide;
+	bool horizontal;
+	int direction;
+	float penX, penY;
+	float mass;
+	StateObjectBox state;
+	BoundingBox* targetColision;
 private:
-	float x,y;
+	float x, y;
+	
 	int BoundingWidht, boundingHeight;
-
+	
 
 };

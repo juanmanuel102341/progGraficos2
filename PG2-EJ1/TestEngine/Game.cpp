@@ -31,8 +31,8 @@ bool Game::OnStart() {
 	triangle2->SetPos(0, -5, 0);
 	colorShape->SetPos(7, 0, 0);
 	circle->SetPos(-5,5, 0);
-	avatar1->SetPos(0, 0, 0);
-	avatar2->SetPos(0, 4, 0);
+	avatar1->SetPos(0,0, 0);
+	avatar2->SetPos(0, -4, 0);
 
 	triangle->Start();
 	triangle2->Start();
@@ -44,11 +44,19 @@ bool Game::OnStart() {
 	avatar1->LoadBmp("testFrame.bmp");
 	avatar1->SetFrame(0);
 	avatar2->LoadBmp("testFrame.bmp");
-	avatar2->SetFrame(0);
+	avatar2->SetFrame(1);
+	avatar1->SetCollisionState(circleCollider);
+	avatar2->SetCollisionState(circleCollider);
+	avatar1->SetObjectState(StateObject::movil);
+	avatar2->SetObjectState(StateObject::movil);
+	avatar1->SetMass(1);
+	avatar2->SetMass(10);
 
-	colisionManager->RegisterBoundingBox(avatar1->box, A);
-	colisionManager->RegisterBoundingBox(avatar2->box, B);
 
+	//colisionManager->RegisterBoundingBox(avatar1->box, A);
+	//colisionManager->RegisterBoundingBox(avatar2->box, B);
+	colisionManager->RegisterBoundingCircle(avatar1->circle, A);
+	colisionManager->RegisterBoundingCircle(avatar2->circle, B);
 	
 	return true;
 }
@@ -88,10 +96,13 @@ bool Game::OnUpdate() {
 	
 	avatar1->UpdatePosition();
 	avatar2->UpdatePosition();
-	colisionManager->OnCheckCollision();
-	if (!avatar2->box->collide) {
+	//colisionManager->OnCheckCollisionBox();
+	colisionManager->OnCheckCollisionCircle();
+	if (!avatar2->check) {
 	
-		avatar2->SetMoveY(-0.002f);
+		//avatar2->SetMoveX(-0.002f);
+		//avatar2->SetMoveX(0.002f);
+	avatar2->SetMoveY(0.002f);
 	}
 	if (i >= 5) {
 		return false;
