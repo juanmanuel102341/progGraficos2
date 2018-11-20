@@ -42,12 +42,12 @@ bool Game::OnStart() {
 	avatar2->StartAvatar();
 	
 	avatar1->LoadBmp("testFrame.bmp");
-	avatar1->SetFrame(0);
+	//avatar1->SetFrame(0);
 	avatar2->LoadBmp("testFrame.bmp");
-	avatar2->SetFrame(1);
+	avatar2->SetFrame(2);
 	avatar1->SetCollisionState(circleCollider);
 	avatar2->SetCollisionState(circleCollider);
-	avatar1->SetObjectState(StateObject::movil);
+	avatar1->SetObjectState(StateObject::fijo);
 	avatar2->SetObjectState(StateObject::movil);
 	avatar1->SetMass(1);
 	avatar2->SetMass(10);
@@ -57,7 +57,8 @@ bool Game::OnStart() {
 	//colisionManager->RegisterBoundingBox(avatar2->box, B);
 	colisionManager->RegisterBoundingCircle(avatar1->circle, A);
 	colisionManager->RegisterBoundingCircle(avatar2->circle, B);
-	
+	animationManager->SetAnimation(avatar1, 1, 2,true);
+	animationManager->SetAnimation(avatar2, 1, 2,false);
 	return true;
 }
 
@@ -82,9 +83,9 @@ void Game::OnDraw() {
 	avatar2->Draw();
 }
 
-bool Game::OnUpdate() {
+bool Game::OnUpdate(double elapsed) {
 	i++;
-	//std::cout << "Game: OnUpdate: "<<i << std::endl;
+	//std::cout << "Game: OnUpdate elapsed: "<<elapsed << std::endl;
 	triangle->SetMoveX(0.002f);
 	
 	//triangle->SetMoveY(-0.002f);
@@ -98,11 +99,12 @@ bool Game::OnUpdate() {
 	avatar2->UpdatePosition();
 	//colisionManager->OnCheckCollisionBox();
 	colisionManager->OnCheckCollisionCircle();
+	animationManager->Update(elapsed);
 	if (!avatar2->check) {
 	
 		//avatar2->SetMoveX(-0.002f);
 		//avatar2->SetMoveX(0.002f);
-	avatar2->SetMoveY(0.002f);
+	//avatar2->SetMoveY(0.002f);
 	}
 	if (i >= 5) {
 		return false;

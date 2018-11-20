@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BoundingCircle.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="BoundignBox.cpp" />
     <ClCompile Include="BoundingCircle.cpp" />

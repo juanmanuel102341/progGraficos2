@@ -22,7 +22,7 @@ bool GameBase::Start() {
 	materialSprite = new Material(renderer);
 	materialSprite->LoadShader(sprite);
 	colisionManager = new ColisionManager;
-
+	animationManager = new Animation;
 	if (!OnStart()) { 
 		good = false;
 	}
@@ -45,20 +45,29 @@ bool GameBase::Stop() {
 	delete renderer;
 	delete material;
 	delete materialSprite;
-//	delete colisionManager;
+	delete colisionManager;
+	delete animationManager;
 	return good;
 }
 
 void GameBase::Loop() {
 	bool loop = true;
-	std::cout << "GameBase: Loop"<< std::endl;
+	double elapsed=0;
+	//std::cout << "GameBase: Loop"<< std::endl;
 	while (!window->ShouldClose()) {
+		
+		clock_t begin = clock();
 		window->PollEvents();
 		renderer->ClearColor();
 		renderer->ClearScreen();
-		OnUpdate();
+		OnUpdate(elapsed);
 		OnDraw();
 		renderer->SwappBuffer();
+		clock_t end = clock();
+		 elapsed= double(end - begin) / CLOCKS_PER_SEC;
+	//	 t += elapsed;
+
+	
 	}
 
 }

@@ -15,7 +15,7 @@ protected:
 	bool OnStop() override;
 	bool OnStart() override;
 	void OnDraw() override;
-	bool OnUpdate() override;
+	bool OnUpdate(double elapsed) override;
 public:
 	Game();
 	~Game();

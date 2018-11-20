@@ -12,6 +12,8 @@
 #include"Sprite.h"
 #include"ColisionManager.h"
 #include"Avatar.h"
+#include<ctime>
+#include"Animation.h"
 class ENGINEDLL_API GameBase {
 
 protected:
@@ -19,14 +21,15 @@ protected:
 	Material* material;
 	Material* materialSprite;
 	ColisionManager* colisionManager;
+	Animation* animationManager;
 private:
 	
 	Window* window;
-
+	double t;
 protected:
 	virtual bool OnStart() = 0;
 	virtual bool OnStop() = 0;
-	virtual bool OnUpdate() = 0;
+	virtual bool OnUpdate(double elapsed) = 0;
 	virtual void OnDraw() = 0;
 public:
 	bool Start();
