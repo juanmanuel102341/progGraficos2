@@ -44,14 +44,10 @@ bool Game::OnStart() {
 	avatar1->LoadBmp("testFrame.bmp");
 	//avatar1->SetFrame(0);
 	avatar2->LoadBmp("testFrame.bmp");
-	avatar2->SetFrame(2);
-	avatar1->SetCollisionState(circleCollider);
-	avatar2->SetCollisionState(circleCollider);
-	avatar1->SetObjectState(StateObject::fijo);
-	avatar2->SetObjectState(StateObject::movil);
-	avatar1->SetMass(1);
-	avatar2->SetMass(10);
-
+	//avatar2->SetFrame(2);
+	
+	avatar1->SetObjectValues(circleCollider, fijo, 1);
+	avatar2->SetObjectValues(circleCollider, movil, 10);
 
 	//colisionManager->RegisterBoundingBox(avatar1->box, A);
 	//colisionManager->RegisterBoundingBox(avatar2->box, B);
@@ -104,7 +100,7 @@ bool Game::OnUpdate(double elapsed) {
 	
 		//avatar2->SetMoveX(-0.002f);
 		//avatar2->SetMoveX(0.002f);
-	//avatar2->SetMoveY(0.002f);
+	avatar2->SetMoveY(0.002f);
 	}
 	if (i >= 5) {
 		return false;

@@ -20,10 +20,7 @@ public:
 	void CheckCollision();
 	BoundingBox* box;
 	BoundingCircle* circle;
-
-	void SetObjectState(StateObject state);
-	void SetCollisionState(ColisionState colisionState);
-	void SetMass(float _mass);
+	void SetObjectValues(ColisionState colisionState, StateObject state, float mass);
 	bool check;
 	bool triguerEvent;
 private:

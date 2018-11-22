@@ -3,17 +3,39 @@ Avatar::Avatar(Renderer* renderer) :Sprite(renderer), check(false), triguerEvent
 
 	
 }
-void Avatar::SetCollisionState(ColisionState _collisionState) {
-	collisionState = _collisionState;
+void Avatar::SetObjectValues(ColisionState _colisionState, StateObject _state, float _mass) {
+	collisionState= _colisionState;
 	if (collisionState == boxCollider) {
 		box = new BoundingBox();
 		box->SetValues(posX, posY, widthSprite, heightSprite);
+		if (_state == fijo) {
+			box->state = StateObjectBox::fijoBox;
+		}
+		else if (_state == movil) {
+			box->state = StateObjectBox::movilBox;
+		}
+		box->mass = _mass;
 	}
-	else if(collisionState==circleCollider) {
+	else if (collisionState == circleCollider) {
 		circle = new BoundingCircle();
 		circle->SetValues(posX, posY, widthSprite / 2);
+		if (_state == fijo) {
+
+			circle->state = StateObjectCircle::fijoCircule;
+		}
+		else if (_state == movil) {
+
+			circle->state = StateObjectCircle::movileCircule;
+		}
+		else if (_state == trigger)
+		{
+			circle->state = StateObjectCircle::triggerCircle;
+		}
+	
+		circle->mass = _mass;
 	}
 }
+
 void Avatar::StartAvatar() {
 	Sprite::Start();
 	
@@ -29,44 +51,7 @@ void Avatar::StopAvatar() {
 	}
 	
 }
-void Avatar::SetObjectState(StateObject _state) {
-	if (collisionState == boxCollider) {
-		if (_state == fijo) {
-			box->state = StateObjectBox::fijoBox;
-		}
-		else if(_state==movil) {
-			box->state = StateObjectBox::movilBox;
-		}
-		
-	}
-	else if (collisionState == circleCollider) {
-		if (_state == fijo) {
-			
-			circle->state = StateObjectCircle::fijoCircule;
-		}
-		else if (_state == movil) {
-		
-			circle->state = StateObjectCircle::movileCircule;
-		}
-		else if(_state==trigger)
-		{
-			circle->state = StateObjectCircle::triggerCircle;
-		}
-		
-		
-	}
-	
-}
-void Avatar::SetMass(float _mass) {
-	mass = _mass;
-	if (collisionState == boxCollider) {
-		box->mass = _mass;
-	}
-	else if(collisionState==circleCollider)
-	{
-		circle->mass = _mass;
-	}
-}
+
 void Avatar::CheckCollision() {
 	if (collisionState == boxCollider) {
 		if (box->collide) {
