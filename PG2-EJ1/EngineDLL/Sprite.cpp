@@ -42,8 +42,8 @@ void Sprite::LoadBmp(const char* imagePath) {
 	SetFrameValues();
 }
 void Sprite::SetFrameValues(){
-	widthFrame = 200;
-	heightFrame = 200;
+	widthFrame = 192;
+	heightFrame = 192;
 }
 void Sprite::SetFrame(int id) {
 	

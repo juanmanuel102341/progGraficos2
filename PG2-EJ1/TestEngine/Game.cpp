@@ -41,9 +41,9 @@ bool Game::OnStart() {
 	avatar1->StartAvatar();
 	avatar2->StartAvatar();
 	
-	avatar1->LoadBmp("testFrame.bmp");
+	avatar1->LoadBmp("testFrame2.bmp");
 	//avatar1->SetFrame(0);
-	avatar2->LoadBmp("testFrame.bmp");
+	avatar2->LoadBmp("testFrame2.bmp");
 	//avatar2->SetFrame(2);
 	
 	avatar1->SetObjectValues(circleCollider, fijo, 1);
@@ -100,7 +100,7 @@ bool Game::OnUpdate(double elapsed) {
 	
 		//avatar2->SetMoveX(-0.002f);
 		//avatar2->SetMoveX(0.002f);
-	avatar2->SetMoveY(0.002f);
+	//avatar2->SetMoveY(0.002f);
 	}
 	if (i >= 5) {
 		return false;
