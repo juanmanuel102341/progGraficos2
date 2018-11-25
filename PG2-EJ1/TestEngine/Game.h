@@ -6,11 +6,14 @@ class Game : public GameBase {
 private:
 	int i;
 	Triangle* triangle;
-	Triangle* triangle2;
+
 	ColorShape* colorShape;
 	Circle* circle;
 	Avatar* avatar1;
 	Avatar* avatar2;
+
+	Avatar* avatar3;
+	Avatar* avatar4;
 protected:
 	bool OnStop() override;
 	bool OnStart() override;
