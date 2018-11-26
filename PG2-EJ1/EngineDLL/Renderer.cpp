@@ -47,7 +47,7 @@ bool Renderer::Start() {
 	UpdateMVP();
 	return true;
 }
-glm::mat4 Renderer::GetMVP() {
+glm::mat4& Renderer::GetMVP() {
 	return MVP;
 }
 bool Renderer::Stop() {

@@ -1,5 +1,6 @@
 #pragma once
 #include "Exports.h"
+#include"TypeDef.h"
 #include <iostream>
 #include"Window.h"
 #include <stdio.h>
@@ -40,7 +41,7 @@ public:
 	void LoadIdentity();
 	void SetModelMatriz(glm::mat4 _model);
 	~Renderer();
-	glm::mat4 GetMVP();
+	glm::mat4& GetMVP();
 	unsigned int GenTexture(int width,int height,unsigned char* data);
 private:
 	Window* window;

@@ -8,6 +8,7 @@ void Shape::Draw(){
 	renderer->LoadIdentity();
 	renderer->SetModelMatriz(matrizModel);//le paso los vertices setiados de triangle
 	material->Bind();//cargo el shader del material
+
 	material->SetMatrixMaterial(renderer->GetMVP());//le paso la MVP al shader
 	if (applyUv) {
 		material->SetSpriteMaterial(idTexture);
