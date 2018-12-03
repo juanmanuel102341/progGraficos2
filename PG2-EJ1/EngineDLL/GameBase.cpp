@@ -53,18 +53,19 @@ bool GameBase::Stop() {
 void GameBase::Loop() {
 	bool loop = true;
 	double elapsed=0;
+	clock_t end = clock();
 	//std::cout << "GameBase: Loop"<< std::endl;
 	while (!window->ShouldClose()) {
 		
 		clock_t begin = clock();
+		elapsed= double(begin - end) / CLOCKS_PER_SEC;
+		end = begin;
 		window->PollEvents();
 		renderer->ClearColor();
 		renderer->ClearScreen();
 		OnUpdate(elapsed);
 		OnDraw();
 		renderer->SwappBuffer();
-		clock_t end = clock();
-		 elapsed= double(end - begin) / CLOCKS_PER_SEC;
 	//	 t += elapsed;
 
 	

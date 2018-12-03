@@ -23,8 +23,8 @@ public:
 	void SetRotY(float angle);
 	void SetRotZ(float angle);
 	void SetScale(float amountX,float amountY,float amountZ);
-	void SetMoveX(float velocity);
-	void SetMoveY(float velocity);
+	void SetMoveX(float velocity,float _elapsed);
+	void SetMoveY(float velocity,float _elapsed);
 	//~Entity();
 	void SetMaterial(Material* material);
 

@@ -12,39 +12,39 @@ Game::~Game() {
 bool Game::OnStart() {
 	i = 0;
 	std::cout << "Game: OnStart" << std::endl;
-	//triangle = new Triangle(renderer);
+	triangle = new Triangle(renderer);
 	
-	//colorShape = new ColorShape(renderer);
-	//circle = new Circle(renderer);
+	colorShape = new ColorShape(renderer);
+	circle = new Circle(renderer);
 	
 	avatar1 = new Avatar(renderer);
 	avatar2 = new Avatar(renderer);
 	avatar3 = new Avatar(renderer);
 	avatar4 = new Avatar(renderer);
 
-	//triangle->SetMaterial(material);
+	triangle->SetMaterial(material);
 	
-	//colorShape->SetMaterial(material);
-	//circle->SetMaterial(material);
+	colorShape->SetMaterial(material);
+	circle->SetMaterial(material);
 	
 	avatar1->SetMaterial(materialSprite);
 	avatar2->SetMaterial(materialSprite);
 	avatar3->SetMaterial(materialSprite);
 	avatar4->SetMaterial(materialSprite);
 
-	//triangle->SetPos(5, 0, 0);
+	triangle->SetPos(5, 5, 0);
 	
-	//colorShape->SetPos(7, 0, 0);
-	//circle->SetPos(-5,5, 0);
+	colorShape->SetPos(7, 0, 0);
+	circle->SetPos(-5,5, 0);
 	avatar1->SetPos(0,0, 0);
 	avatar2->SetPos(0, -4, 0);
 	avatar3->SetPos(4, 0, 0);
 	avatar4->SetPos(4, 4, 0);
 
-	//triangle->Start();
+	triangle->Start();
 	
-	//colorShape->Start();
-	//circle->Start();
+	colorShape->Start();
+	circle->Start();
 	avatar1->StartAvatar();
 	avatar2->StartAvatar();
 	avatar3->StartAvatar();
@@ -58,9 +58,9 @@ bool Game::OnStart() {
 
 	//avatar2->SetFrame(2);
 	
-	avatar1->SetObjectValues(boxCollider, fijo, 1);
+	avatar1->SetObjectValues(boxCollider, movil, 1);
 	avatar2->SetObjectValues(boxCollider, movil, 10);
-	avatar3->SetObjectValues(circleCollider, fijo, 1);
+	avatar3->SetObjectValues(circleCollider, movil, 1);
 	avatar4->SetObjectValues(circleCollider, movil, 10);
 
 	colisionManager->RegisterBoundingBox(avatar1->box, A);
@@ -77,10 +77,10 @@ bool Game::OnStart() {
 
 bool Game::OnStop() {
 	std::cout << "Game: Stop" << std::endl;
-	//triangle->Stop();
+	triangle->Stop();
 	
-	//colorShape->Stop();
-	//circle->Stop();
+	colorShape->Stop();
+	circle->Stop();
 	avatar1->StopAvatar();
 	avatar2->StopAvatar();
 	avatar3->StopAvatar();
@@ -88,12 +88,10 @@ bool Game::OnStop() {
 	return true;
 }
 void Game::OnDraw() {
-	//circle->Draw();
-	//triangle->Draw();
+	circle->Draw();
+	triangle->Draw();
 	
-	//colorShape->Draw();
-	//sprite->Draw();
-//	sprite2->Draw();
+	colorShape->Draw();
 	avatar1->Draw();
 	avatar2->Draw();
 	avatar3->Draw();
@@ -119,14 +117,14 @@ bool Game::OnUpdate(double elapsed) {
 	colisionManager->OnCheckCollisionBox();
 	colisionManager->OnCheckCollisionCircle();
 	animationManager->Update(elapsed);
-	if (!avatar2->check) {
+	//if (!avatar2->check) {
 	
-		//avatar2->SetMoveX(-0.002f);
-		//avatar2->SetMoveX(0.002f);
-	avatar2->SetMoveY(0.002f);
-	}
+	
+	//avatar2->SetMoveX(-0.8f,elapsed);
+	avatar2->SetMoveY(0.8f,elapsed);
+	//}
 	if (!avatar4->check) {
-		avatar4->SetMoveY(-0.002f);
+		avatar4->SetMoveY(-0.8f,elapsed);
 	}
 	if (i >= 5) {
 		return false;

@@ -56,11 +56,11 @@ void Entity::SetRotZ(float angle) {
 	UpdateMatrix();
 
 }
-void Entity::SetMoveX(float velocity) {
-	posX += velocity;
+void Entity::SetMoveX(float velocity,float _elapsed) {
+	posX += velocity*_elapsed;
 	//cout << "posx " << posX << endl;
 	glm::vec3 axis;
-	axis[0] = velocity;
+	axis[0] = velocity*_elapsed;
 	axis[1] = 0;
 	axis[2] = 0;
 	matrizTraslacion=glm::translate(matrizTraslacion, axis);
@@ -68,11 +68,11 @@ void Entity::SetMoveX(float velocity) {
 
 	
 }
-void Entity::SetMoveY(float velocity) {
-	posY += velocity;
+void Entity::SetMoveY(float velocity,float _elapsed) {
+	posY += velocity*_elapsed;
 	glm::vec3 axis;
 	axis[0] = 0;
-	axis[1] = velocity;
+	axis[1] = velocity*_elapsed;
 	axis[2] = 0;
 	matrizTraslacion = glm::translate(matrizTraslacion, axis);
 	UpdateMatrix();
