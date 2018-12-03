@@ -138,6 +138,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TypeDef.h" />
     <ClInclude Include="Window.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
