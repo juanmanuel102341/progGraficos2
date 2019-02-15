@@ -2,9 +2,18 @@
 
 void Sprite::Stop(){
 }
+void Sprite::SetMyVertices(float* vertices) {
+	gvertices = new float[30];
+	gvertices =vertices;
+}
+void Sprite::PassingVerticesTileMap(float* vertices) {
+	gvertices = vertices;
+	int size = sizeof(float) * 30;
+	vertexBuffer = renderer->SetBufferData(gvertices, size);
+}
 void Sprite::Start() {
-	gvertices = new float[32]
-	{	
+	
+	/*{	
 		-1.0f, 1.0f, 0.0f,
 		1.0f,0.0f,0.0f,//color
 		0.0f,1.0f,//uv esquina superior izquierda
@@ -21,15 +30,21 @@ void Sprite::Start() {
 		1.0f,0.0f,0.0f,//color
 		1.0f,0.0f,//uv esquina inferior derecha
 	};
-	int size = sizeof(float) * 32;
+	*/
+	int size = sizeof(float) * 30;
 	vertexBuffer = renderer->SetBufferData(gvertices, size);
-	numberOfVertices = 4;
-	primitive = strip;
+	numberOfVertices = 6;
+	primitive = triangle;
 	applyUv = true;
-	tam = 8;
-	widthSprite = abs(gvertices[8] - gvertices[0]);
-	heightSprite =abs( gvertices[17] - gvertices[1]);
-
+	applyColor = false;
+	tam = 5;
+	
+	widthSprite = gvertices[5]-gvertices[0];
+	heightSprite = gvertices[11]-gvertices[1];
+	heightSprite = heightSprite*-1;
+	cout << "widht sprite " << widthSprite << endl;
+	cout << "height sprite " << heightSprite << endl;
+	SetPos(POS_MAP_X, POS_MAP_Y, 0);
 }
 void Sprite::LoadBmp(const char* imagePath) {
 	DataBmp d=importBmp.LoadTexture(imagePath, renderer);
@@ -40,28 +55,56 @@ void Sprite::LoadBmp(const char* imagePath) {
 	cout << "idtexture bmp " << idTexture<<endl;
 	cout << "width sprite " << data.width<<endl;
 	SetFrameValues();
+	
 }
 void Sprite::SetFrameValues(){
 	widthFrame = 192;
 	heightFrame = 192;
 }
 void Sprite::SetFrame(int id) {
-	
+	int index = 0;
 	x = (int)(id % 3)*widthFrame;
 	y = (int)(id / 3)*heightFrame;
-	gvertices[6]=  x / data.width;//u 0
-	gvertices[7] = 1.0f - y / data.height;//v 0
 	
-	gvertices[14] = (x + widthFrame) / data.width;// u 1
-	gvertices[15] = 1.0f - y / data.height;//v 1
-	
-	gvertices[22] = x / data.width;//u 2
-	gvertices[23] = 1.0f - (y + heightFrame) / data.height;//v2
+	index += 3;
+	//vertice, esquina superior izquierda
 
-	gvertices[30] = (x + widthFrame) / data.width;//u3
-	gvertices[31] = 1.0f - (y + heightFrame )/ data.height;//v3
-	
-	int size = sizeof(float) * 32;
+	gvertices[index] = x / data.width;//vertice sup izquierdo, siempre 0 1
+	index++;
+	gvertices[index] = 1.0f - y / data.height;//
+	index++;
+	index += 3;
+	//vertice esquina sup derecha
+	gvertices[index] = (x + widthFrame) / data.width;// vertice sup derecho
+	index++;
+	gvertices[index] = 1.0f - y / data.height;//
+	index++;
+	index += 3;
+	//vert inf izquierdo
+	gvertices[index] = x / data.width;// vertice inferior izquierdo
+	index++;
+	gvertices[index] = 1.0f - (y + heightFrame) / data.height;//
+	index++;
+	index += 3;
+	//****2do poligono*****
+	//vertice esquina sup derecha
+	gvertices[index] = (x + widthFrame) / data.width;// vertice sup derecho
+	index++;
+	gvertices[index] = 1.0f - y / data.height;//
+	index++;
+	index += 3;
+	//vert inf izquierdo
+	gvertices[index] = x / data.width;// vertice inferior izquierdo
+	index++;
+	gvertices[index] = 1.0f - (y + heightFrame) / data.height;//
+	index++;
+	index += 3;
+	// vertice esquina inferior derecha
+	gvertices[index] = (x + widthFrame) / data.width;//vertice inferior derrecho
+	index++;
+	gvertices[index] = 1.0f - (y + heightFrame) / data.height;//
+	index++;
+	int size = sizeof(float) * 30;
 	vertexBuffer = renderer->SetBufferData(gvertices, size);
 
 }

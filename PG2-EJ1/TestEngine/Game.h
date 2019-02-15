@@ -4,16 +4,20 @@
 
 class Game : public GameBase {
 private:
-	int i;
+	float i;
+
 	Triangle* triangle;
 
 	ColorShape* colorShape;
 	Circle* circle;
-	Avatar* avatar1;
+	Avatar* hero;
 	Avatar* avatar2;
 
 	Avatar* avatar3;
 	Avatar* avatar4;
+	TileMap* tileMap;
+	vector<Avatar*>vecEnemies;
+
 protected:
 	bool OnStop() override;
 	bool OnStart() override;

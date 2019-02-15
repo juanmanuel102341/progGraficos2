@@ -35,7 +35,7 @@ bool BoundingCircle::OnCollision(BoundingCircle* circleB) {
 	//cout << "ditancia sqr " << distSqr << endl;
 	//cout << "powradius " << powRadius << endl;
 	if (distSqr < powRadius) {
-		cout << "contacto circle" << endl;
+		//cout << "contacto circle" << endl;
 		distance = sqrt(distSqr);
 		pen = sumRadius - distance;
 		
@@ -48,10 +48,10 @@ bool BoundingCircle::OnCollision(BoundingCircle* circleB) {
 		circleB->targetColision = this;
 		collide = true;
 		circleB->collide = true;
-		cout << "direction x " << directionX;
-		cout << "direction y " << directionY;
-		cout << "distance " << distance << endl;
-		cout << "penetracion " << pen;
+		//cout << "direction x " << directionX;
+		//cout << "direction y " << directionY;
+		//cout << "distance " << distance << endl;
+		//cout << "penetracion " << pen;
 		return true;
 	}
 	return false;

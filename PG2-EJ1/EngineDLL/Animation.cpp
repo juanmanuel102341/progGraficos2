@@ -10,7 +10,7 @@ void Animation::SetAnimation(Avatar* _avatar, int _idFrom, int _idTo,bool _repea
 	data->idTo = _idTo;
 	data->timing = 0;
 	data->index = _idFrom-1;
-	data->avatar->SetFrame(data->index);
+	data->avatar->SetFrame(data->idFrom);
 	data->repeat = _repeat;
 	data->oneShoot = false;
 	listDataAnimation.push_back(data);
@@ -34,7 +34,7 @@ void Animation::Update(double time){
 				else {
 					//cout << "paso el limite cambiando frame" << endl;
 					if (data->repeat ) {
-						data->index = 0;
+						data->index = data->idFrom;
 						data->avatar->SetFrame(data->index);
 					}
 					data->timing = 0;

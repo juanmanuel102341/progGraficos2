@@ -5,6 +5,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 using namespace glm;
+const int POS_MAP_X=-10;
+const int POS_MAP_Y=10;
+
 class ENGINEDLL_API Entity
 {
 protected:
@@ -30,6 +33,7 @@ public:
 
 public:
 	float posX, posY;
+	
 	//unsigned int bufferColor;
 private:
 	glm::vec3 verticesM;

@@ -18,6 +18,7 @@ void Triangle::Start() {
 	numberOfVertices = 3;
 	primitive = strip;
 	applyUv = false;
+	applyColor = true;
 	tam = 6;
 }
 

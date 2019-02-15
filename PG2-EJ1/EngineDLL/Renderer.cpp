@@ -3,17 +3,28 @@
 #include"GLFW\glfw3.h"
 
 
-Renderer::Renderer(Window* _window){
+Renderer::Renderer(Window* _window):moveCamera(0),mx(0){
 	std::cout << "Renderer: Csreado" << std::endl;;
 	window = _window;
+	cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+	cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 }
+void Renderer::ScrollCamera(float elapsed) {
+	cameraPos = glm::vec3(mx,0.0f, 3.0f);
 
+	matrizView = glm::lookAt(cameraPos,cameraPos+cameraFront , cameraUp);
+	
+	mx += SCROLL_SPEED*elapsed;
+	
+}
 
 Renderer::~Renderer() {
 	std::cout << "Renderer: Eliminado" << std::endl;
 }
 void Renderer::UpdateMVP(){
 	MVP = matrizProyection*matrizView* matrizModel;
+	
 }
 void Renderer::LoadIdentity() {
 	matrizModel = glm::mat4(1.0f);
@@ -37,8 +48,10 @@ bool Renderer::Start() {
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
 	matrizProyection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 100.0f);
+	
+
 	matrizView = glm::lookAt(
-		glm::vec3(0, 0,3),
+		glm::vec3(0, 0, 3),
 		glm::vec3(0, 0, 0),
 		glm::vec3(0, 1,0)
 
@@ -115,6 +128,8 @@ void Renderer::DrawBuffer(int tam,Primitive prim) {
 		break;
 	default:
 		break;
+	case triangle:
+		glDrawArrays(GL_TRIANGLES, 0, tam);
 	}
 
 }

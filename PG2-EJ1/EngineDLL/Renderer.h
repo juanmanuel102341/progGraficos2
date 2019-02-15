@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream>
 #include <fstream>
 #include <algorithm>
 #include <sstream>
@@ -15,14 +14,15 @@ using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
+const float SCROLL_SPEED = 0.2f;
 enum Primitive {
-	strip, fun
+	strip, fun,triangle
 };
 class ENGINEDLL_API Renderer {
 public:
 	bool Start();
 	bool Stop();
-
+	void ScrollCamera(float elapsed);
 	void ClearColor();
 	void ClearScreen();
 	void SwappBuffer();
@@ -43,13 +43,21 @@ public:
 	~Renderer();
 	glm::mat4& GetMVP();
 	unsigned int GenTexture(int width,int height,unsigned char* data);
+public:
+	float mx;
 private:
 	Window* window;
 	glm::mat4 matrizProyection;
 	glm::mat4 matrizView;
 	glm::mat4 matrizModel;
 	glm::mat4 MVP;
+	glm::vec3 cameraPos;
+	glm::vec3 cameraFront;
+	glm::vec3 cameraUp;
 	unsigned int vertexArrayId;
+	float moveCamera;
+	
+	
 private:
 	void UpdateMVP();
 	

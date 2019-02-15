@@ -15,11 +15,13 @@ void Shape::Draw(){
 	}
 	renderer->BeginDraw(0);
 	renderer->BindBuffer(vertexBuffer, 0,3,tam, 0);
-	renderer->BeginDraw(1);
-	renderer->BindBuffer(vertexBuffer, 1,3,tam, (char*)(sizeof(float) * 3));
+	if (applyColor) {
+		renderer->BeginDraw(1);
+		renderer->BindBuffer(vertexBuffer, 1, 3, tam, (char*)(sizeof(float) * 3));
+	}
 	if (applyUv) {
 		renderer->BeginDraw(2);
-		renderer->BindBuffer(vertexBuffer, 2, 2, tam, (char*)(sizeof(float) * 6));
+		renderer->BindBuffer(vertexBuffer, 2, 2, tam, (char*)(sizeof(float) * 3));
 		//renderer->BindTexture(idTexture);
 	}
 

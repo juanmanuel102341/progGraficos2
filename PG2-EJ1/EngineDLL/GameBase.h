@@ -14,6 +14,7 @@
 #include"Avatar.h"
 #include<ctime>
 #include"Animation.h"
+#include"TileMap.h"
 class ENGINEDLL_API GameBase {
 
 protected:
@@ -22,6 +23,7 @@ protected:
 	Material* materialSprite;
 	ColisionManager* colisionManager;
 	Animation* animationManager;
+	bool activateScrollX;
 private:
 	
 	Window* window;

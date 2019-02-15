@@ -21,6 +21,7 @@ void ColorShape::Start() {
 	numberOfVertices = 4;
 	primitive = strip;
 	applyUv = false;
+	applyColor = true;
 	tam = 6;
 //	bufferColor = renderer->SetBufferData(colorsVertices, size);
 }

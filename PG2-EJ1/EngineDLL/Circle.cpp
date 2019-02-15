@@ -32,6 +32,7 @@ void Circle::Start() {
 	numberOfVertices = numberOfVerticesCircle;
 	primitive = fun;
 	applyUv = false;
+	applyColor = true;
 	tam = 6;
 }
 void Circle::Stop() {

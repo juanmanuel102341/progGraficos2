@@ -64,6 +64,7 @@ void GameBase::Loop() {
 		renderer->ClearColor();
 		renderer->ClearScreen();
 		OnUpdate(elapsed);
+
 		OnDraw();
 		renderer->SwappBuffer();
 	//	 t += elapsed;

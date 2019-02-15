@@ -9,6 +9,7 @@ protected:
 	int numberOfVertices;//para draw
 	Primitive primitive;//para draw
 	bool applyUv;
+	bool applyColor;
 	unsigned int idTexture;
 	int tam;
 public:

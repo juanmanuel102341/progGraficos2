@@ -15,7 +15,7 @@ bool BoundingBox::OnCollision(BoundingBox* boxB){
 	deltaX = abs(boxB->x- x);
 	deltaY = abs(boxB->y - y);
 	if (deltaX < BoundingWidht / 2 + boxB->BoundingWidht / 2 && deltaY < boundingHeight / 2 + boxB->boundingHeight / 2) {
-		cout << "colision !" << endl;
+		cout << "****************colision !**********************" << endl;
 		targetColision = boxB;
 		boxB->targetColision = this;
 
@@ -25,7 +25,7 @@ bool BoundingBox::OnCollision(BoundingBox* boxB){
 		boxB->penY = boxB->boundingHeight / 2 + boundingHeight / 2 - deltaY;
 		if (penX > penY) {
 			//vertical
-			cout << "boundign vertical " << endl;
+			//cout << "boundign vertical " << endl;
 			horizontal = false;
 			boxB->horizontal = false;
 			if (boxB->y>y) {
@@ -40,25 +40,25 @@ bool BoundingBox::OnCollision(BoundingBox* boxB){
 		}
 		else
 		{
-			cout << "**********choque horizontal*******" << endl;
+		//	cout << "**********choque horizontal*******" << endl;
 			horizontal = true;
 			boxB->horizontal = true;
 			if (boxB->x>x) {
 			//bounding b viene de la derecha
-				cout << "bounding b viene de la derecha " << endl;
+			//	cout << "bounding b viene de la derecha " << endl;
 				boxB->direction = 1;
 				direction = -1;
-				cout << "direction objeto base" << direction<<endl;
-				cout << "direction objeto b" << boxB->direction << endl;
-				cout << "penetracion x " << penX<<endl;
+				//cout << "direction objeto base" << direction<<endl;
+				//cout << "direction objeto b" << boxB->direction << endl;
+				//cout << "penetracion x " << penX<<endl;
 			}
 			else {
 				
-				cout << "bounding b viene de la  izquierda "<<endl;
+			//	cout << "bounding b viene de la  izquierda "<<endl;
 				boxB->direction = -1;
 				direction = 1;
 				//cout << "direction objeto base" << direction<<endl;
-				cout << "direction objeto b" << boxB->direction << endl;
+				//cout << "direction objeto b" << boxB->direction << endl;
 			}
 		}
 		boxB->collide = true;
