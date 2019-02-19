@@ -95,20 +95,31 @@ void TileMap::SetNewObjects() {
 	
 	for (int i = 0; i < 10; i++) {
 		if (aTiles[i][lastWave] == ENEMY_ID) {
-			DataTiles* e = new DataTiles;
-			e->idFrom = 3;
-			e->idTo = 4;
-			e->x = POS_MAP_X + lastWave*ancho - ancho;
-			e->y = POS_MAP_Y - i*alto;
-			dataEnemies.push_back(e);
+			DataTiles* e = GenerateDataTiles(i,lastWave,2,2);
+				dataEnemies.push_back(e);
 			float* enemy;
 			enemy = getEntityValues( i,currentIndex);
 			enemiesValues.push_back(enemy);
 		}
+		else if (aTiles[i][lastWave] == ASTEROID_ID) {
+			DataTiles* dataTiles = GenerateDataTiles(i, lastWave, 3, 3);
+			dataAsteroids.push_back(dataTiles);
+			float* asteroid;
+			asteroid = getEntityValues(i, currentIndex);
+			asteroidsValues.push_back(asteroid);
+		}
+		
 	}
 	lastWave++;
 }
-
+DataTiles* TileMap::GenerateDataTiles(int index_i, int index_i2,int from,int to) {
+	DataTiles* auxdata=new DataTiles;
+	auxdata->idFrom = from;
+	auxdata->idTo = to;
+	auxdata->x = POS_MAP_X + index_i2*ancho - ancho;
+	auxdata->y = POS_MAP_Y - index_i*alto;
+	return auxdata;
+}
 void TileMap::Set() {
 	int index=0;
 	int indexPlayer = 0;
@@ -120,31 +131,29 @@ void TileMap::Set() {
 
 			if (aTiles[i][i2] == PLAYER_ID) {
 			
-				dataPlayer.idFrom = 0;
-				dataPlayer.idTo = 2;
-				dataPlayer.x = POS_MAP_X + i2*ancho-ancho;
-				dataPlayer.y = POS_MAP_Y - i*alto;
-				//cout << "pos index " << index << endl;
-
-				cout << "pos real player x" << dataPlayer.x<<endl;
-				cout << "pos real player y" << dataPlayer.y << endl;
+				dataPlayer = GenerateDataTiles(i, i2, 1, 1);
 				playerValues = getEntityValues(i, i2);
 
 				index = 0;
 			}
 			else if (aTiles[i][i2]==ENEMY_ID) {
 				cout << "entrando enemy" << endl;
-				DataTiles* e=new DataTiles;
-				e->idFrom = 3;
-				e->idTo = 4;
-				e->x = POS_MAP_X + i2*ancho-ancho;
-				e->y = POS_MAP_Y - i*alto;
+				DataTiles* e=GenerateDataTiles(i,i2,2,2);
 				dataEnemies.push_back(e);
 				float* enemy;
 				enemy = getEntityValues(i, i2);
 				enemiesValues.push_back(enemy);
-				cout << "pos x enemy " << e->x<<endl;
-				cout << "pos y enemy " << e->y << endl;
+				
+			}
+			else if (aTiles[i][i2] == ASTEROID_ID) {
+				DataTiles* data = GenerateDataTiles(i,i2,3,3);
+				
+				dataAsteroids.push_back(data);
+				float* asteroids;
+				asteroids = getEntityValues(i, i2);
+				asteroidsValues.push_back(asteroids);
+
+
 			}
 			
 		}
@@ -246,7 +255,7 @@ void TileMap::Start() {
 	}
 	
 	//cout << "*********************entrando tilemap******************" << endl;
-	LoadExternalMap("base_02.tmx",SIZE_EXTERNAL_MAP_X,SIZE_EXTERNAL_MAP_Y);
+	LoadExternalMap("base_03c.tmx",SIZE_EXTERNAL_MAP_X,SIZE_EXTERNAL_MAP_Y);
 	playerValues = new float[30];
 	Set();
 }

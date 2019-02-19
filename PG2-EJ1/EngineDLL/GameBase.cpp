@@ -9,8 +9,10 @@ bool GameBase::Start() {
 	bool good = true;
 	window = new Window(800, 600, "motor sala");
 	renderer = new Renderer(window);
-	
-	
+	inputManager = new InputManager(renderer);
+	//inputManager->StartEvent();
+	//GLFWwindow* w = window->GetWindow();
+	//glfwSetKeyCallback(window->GetWindow(), inputManager->KeyCallBack);
 	if (!window->Start()) {
 		good = false;
 	}

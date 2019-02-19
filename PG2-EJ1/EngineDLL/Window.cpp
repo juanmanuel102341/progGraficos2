@@ -1,5 +1,5 @@
 #include"Window.h"
-#include"GLFW\glfw3.h"
+//#include"GLFW\glfw3.h"
 Window::Window(int _ancho, int _alto, string _nombre) {
 	ancho = _ancho;
 	alto = _alto;
@@ -36,6 +36,6 @@ bool Window::ShouldClose() {
 void Window::PollEvents() {
 	glfwPollEvents();
 }
-void* Window::GetWindow() {
+GLFWwindow* Window::GetWindow() {
 	return window;
 }

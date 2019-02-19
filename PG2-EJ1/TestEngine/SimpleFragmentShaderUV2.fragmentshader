@@ -1,0 +1,19 @@
+#version 330 core
+
+// Ouput data
+out vec3 fragColor;
+
+in vec3 theColor;
+in vec2 textCoord;
+
+uniform sampler2D myTextureSampler;
+void main()
+{
+
+	
+	fragColor=texture(myTextureSampler,textCoord).rgb;
+	if(fragColor.rgb<=vec3(0.97,0.97,0.97))
+	discard;
+	
+
+}

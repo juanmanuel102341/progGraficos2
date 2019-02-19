@@ -2,6 +2,9 @@
 #include "Exports.h"
 #include"TypeDef.h"
 #include <iostream>
+#include"GL\glew.h"
+#include"GLFW\glfw3.h"
+
 #include"Window.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,6 +14,8 @@
 #include <sstream>
 #include <vector>
 using namespace std;
+
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
@@ -45,8 +50,9 @@ public:
 	unsigned int GenTexture(int width,int height,unsigned char* data);
 public:
 	float mx;
-private:
 	Window* window;
+private:
+	
 	glm::mat4 matrizProyection;
 	glm::mat4 matrizView;
 	glm::mat4 matrizModel;

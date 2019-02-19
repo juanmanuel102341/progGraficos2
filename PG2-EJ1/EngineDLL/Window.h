@@ -3,6 +3,7 @@
 #include <iostream>
 #include<string>
 #include<iostream>
+#include"GLFW\glfw3.h"
 using namespace std;
 class ENGINEDLL_API Window 
 {
@@ -13,9 +14,10 @@ public:
 	bool Stop();
 	void PollEvents();
 	bool ShouldClose();
-	void* GetWindow();
+	GLFWwindow* GetWindow();
+	GLFWwindow* window;
 private:
-	void* window;
+	
 	int ancho;
 	int alto;
 	string nombre;

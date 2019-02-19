@@ -11,7 +11,7 @@ void Material::LoadShader(MaterialType mat) {
 		programId = renderer->LoadShader("SimpleTransform.vertexshader", "SimpleFragmentShader.fragmentshader");
 		break;
 	case sprite:
-		programId= renderer->LoadShader("SimpleTransformUV.vertexshader", "SimpleFragmentShaderUV.fragmentshader");
+		programId= renderer->LoadShader("SimpleTransformUV.vertexshader", "SimpleFragmentShaderUV3.fragmentshader");
 		break;
 	default:
 		break;

@@ -22,9 +22,9 @@ void Shape::Draw(){
 	if (applyUv) {
 		renderer->BeginDraw(2);
 		renderer->BindBuffer(vertexBuffer, 2, 2, tam, (char*)(sizeof(float) * 3));
-		//renderer->BindTexture(idTexture);
+		
 	}
-
+	//renderer->BindTexture(idTexture);
 	renderer->DrawBuffer(numberOfVertices,primitive);
 	renderer->EndDraw(0);
 	renderer->EndDraw(1);

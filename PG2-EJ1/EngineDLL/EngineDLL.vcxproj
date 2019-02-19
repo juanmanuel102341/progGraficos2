@@ -78,6 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_WINDLL;%(PreprocessorDefinitions);ENGINEDLL_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)external\glm-0.9.9.0;$(SolutionDir)external\glfw-3.2.1\include;$(SolutionDir)external\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)external\glew-2.1.0\bin\Release\Win32\glew32.dll" "$(OutDir)"</Command>
@@ -134,6 +135,7 @@
     <ClInclude Include="Exports.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="ImporterBmp.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shape.h" />
@@ -154,6 +156,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="ImporterBmp.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shape.cpp" />

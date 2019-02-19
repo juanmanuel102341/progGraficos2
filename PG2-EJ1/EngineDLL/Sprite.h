@@ -14,16 +14,18 @@ public:
 	void SetFrame(int id);
 	void SetFrameValues();
 	void SetMyVertices(float* vertices);
-	void PassingVerticesTileMap(float*vertices);
+	void SetMyBackgroundData();
+	void SetBackGroundVertices();
+	void SetBackGroundFrames(int x,int y);
 public:	
 	int widthSprite;
 	int heightSprite;
-	
+	int widthFrame;
+	int heightFrame;
 private:
 
 private:
-	int widthFrame;
-	int heightFrame;
+	
 	
 	float x, y;
 

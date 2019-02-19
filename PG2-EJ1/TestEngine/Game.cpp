@@ -2,7 +2,7 @@
 
 
 
-Game::Game():vecEnemies(NULL) {
+Game::Game():vecEnemies(NULL),xBack(0) {
 }
 
 
@@ -18,22 +18,21 @@ bool Game::OnStart() {
 	//colorShape = new ColorShape(renderer);
 	//circle = new Circle(renderer);
 	
+	backGround = new Avatar(renderer);
+	
 	hero = new Avatar(renderer);
 
 	//avatar2 = new Avatar(renderer);
 	//avatar3 = new Avatar(renderer);
 	//avatar4 = new Avatar(renderer);
 	tileMap = new TileMap(renderer);
-
-
-	
 	//	triangle->SetMaterial(material);
 	
 	//colorShape->SetMaterial(material);
 	//circle->SetMaterial(material);
 	
 	hero->SetMaterial(materialSprite);
-	
+	backGround->SetMaterial(materialSprite);
 	//avatar2->SetMaterial(materialSprite);
 	//avatar3->SetMaterial(materialSprite);
 	//avatar4->SetMaterial(materialSprite);
@@ -59,38 +58,59 @@ bool Game::OnStart() {
 	//avatar4->StartAvatar();
 	tileMap->Start();
 	
+	for (int i = 0; i < tileMap->asteroidsValues.size(); i++) {
+		Avatar* asteroid = new Avatar(renderer);
+		asteroid->SetMaterial(materialSprite);
+		asteroid->SetMyVertices(tileMap->asteroidsValues[i]);
+		asteroid->StartAvatar();
+		asteroid->LoadBmp("recursosShooter.bmp");
+		asteroid->posX = tileMap->dataAsteroids[i]->x;
+		asteroid->posY = tileMap->dataAsteroids[i]->y;
+		asteroid->SetObjectValues(boxCollider, movil, 1);
+		asteroid->SetFrame(2);
+		colisionManager->RegisterBoundingBox(asteroid->box, B);
+		asteroids.push_back(asteroid);
+	}
 	for (int i = 0; i < tileMap->enemiesValues.size(); i++) {
 		cout << "************entrando creacion enemy************" << endl;
 		Avatar*enemy = new Avatar(renderer);
 		enemy->SetMaterial(materialSprite);
 		enemy->SetMyVertices(tileMap->enemiesValues[i]);
 		enemy->StartAvatar();
-		enemy->LoadBmp("testFrame2.bmp");
+		enemy->LoadBmp("recursosShooter.bmp");
 		enemy->posX = tileMap->dataEnemies[i]->x;
 		enemy->posY = tileMap->dataEnemies[i]->y;
 		enemy->SetObjectValues(boxCollider, movil, 1);
-	
+		enemy->SetFrame(1);
 	
 		vecEnemies.push_back(enemy);
-		
 	}
 	
 	
 	hero->SetMyVertices(tileMap->playerValues);
 
 	hero->StartAvatar();
-
+	backGround->SetBackGroundVertices();
+	backGround->StartAvatar();
+	backGround->SetMyBackgroundData();
 	//tileMap->LoadBmp("testFrame2.bmp");
 	//tileMap->SetFrame(1);
-	hero->LoadBmp("testFrame2.bmp");
+	hero->LoadBmp("recursosShooter.bmp");
+	backGround->LoadBmp("backSpace.bmp");
+	backGround->widthFrame = 1024.0f;
+	backGround->heightFrame = 600.0f;
+	backGround->SetBackGroundFrames(0,0);
+
+	hero->SetFrame(0);
+	//backGround->SetFrame(0);
 	
 	//avatar2->LoadBmp("testFrame2.bmp");
 	//avatar3->LoadBmp("testFrame2.bmp");
 	//avatar4->LoadBmp("testFrame2.bmp");
 
-	hero->posX = tileMap->dataPlayer.x;
-	hero->posY = tileMap->dataPlayer.y;
-	hero->SetObjectValues(boxCollider, fijo, 1);
+	hero->posX = tileMap->dataPlayer->x;
+	hero->posY = tileMap->dataPlayer->y;
+	hero->SetObjectValues(boxCollider, movil, 1);
 	//avatar2->SetObjectValues(boxCollider, movil, 10);
 	//avatar3->SetObjectValues(circleCollider, movil, 1);
 	//avatar4->SetObjectValues(circleCollider, movil, 10);
@@ -105,9 +125,11 @@ bool Game::OnStart() {
 	//vecEnemies[2]->SetPos(, tileMap->dataPlayer.y+10, 0);
 	//cout << "pos enemy 2 x" << tileMap->dataPlayer.x << endl;
 	//cout << "pos enemy 2 y" << tileMap->dataPlayer.y << endl;
-	animationManager->SetAnimation(hero, tileMap->dataPlayer.idFrom, tileMap->dataPlayer.idTo,true);
+	
+	//animationManager->SetAnimation(hero, tileMap->dataPlayer.idFrom, tileMap->dataPlayer.idTo,true);
+	
 	for (int i = 0; i < vecEnemies.size(); i++) {
-		animationManager->SetAnimation(vecEnemies[i], tileMap->dataEnemies[i]->idFrom, tileMap->dataEnemies[i]->idTo, true);
+		//animationManager->SetAnimation(vecEnemies[i], tileMap->dataEnemies[i]->idFrom, tileMap->dataEnemies[i]->idTo, true);
 		if (i == 1) {
 			colisionManager->RegisterBoundingBox(vecEnemies[i]->box,A);
 		}
@@ -116,7 +138,7 @@ bool Game::OnStart() {
 		}
 		}
 	
-	
+	inputManager->StartEvent();
 	
 	//animationManager->SetAnimation(avatar3, 1, 2, true);
 	//animationManager->SetAnimation(avatar4, 1, 2, true);
@@ -142,9 +164,12 @@ void Game::OnDraw() {
 	
 	//colorShape->Draw();
 	
-	
+	backGround->Draw();
 	for (int i = 0; i < vecEnemies.size(); i++) {
 		vecEnemies[i]->Draw();
+	}
+	for (int i = 0; i < asteroids.size(); i++) {
+		asteroids[i]->Draw();
 	}
 	//avatar2->Draw();
 	//avatar3->Draw();
@@ -162,7 +187,8 @@ bool Game::OnUpdate(double elapsed) {
 	//triangle->SetRotX(1.0f);
 	//triangle->SetRotY(1.0f);
 	//triangle->SetRotZ(0.2f);
-	
+	backGround->SetBackGroundFrames(xBack,0);
+	backGround->SetMoveX(SCROLL_SPEED, elapsed);
 	//cout << tileMap->target;
 	if (renderer->mx > tileMap->target) {
 	cout << "mx mayor " << endl;
@@ -177,11 +203,12 @@ bool Game::OnUpdate(double elapsed) {
 		enemy->SetMaterial(materialSprite);
 		enemy->SetMyVertices(tileMap->enemiesValues[indexEnemy]);
 		enemy->StartAvatar();
-		enemy->LoadBmp("testFrame2.bmp");
+		enemy->LoadBmp("recursosShooter.bmp");
 		enemy->posX = tileMap->dataEnemies[indexEnemy]->x;
 		enemy->posY = tileMap->dataEnemies[indexEnemy]->y;
 		enemy->SetObjectValues(boxCollider, movil, 1);
-		animationManager->SetAnimation(enemy, tileMap->dataEnemies[indexEnemy]->idFrom, tileMap->dataEnemies[indexEnemy]->idTo, true);
+		//animationManager->SetAnimation(enemy, tileMap->dataEnemies[indexEnemy]->idFrom, tileMap->dataEnemies[indexEnemy]->idTo, true);
+		enemy->SetFrame(1);
 		if (i == 0) {
 			colisionManager->RegisterBoundingBox(enemy->box, A);
 		}
@@ -218,6 +245,12 @@ bool Game::OnUpdate(double elapsed) {
 		vecEnemies[vecEnemies.size() - 2]->SetMoveX(-1.9f, elapsed);
 	
 	}
+	xBack += 2.8f*elapsed;
+	if (xBack >= 3072.0f) {
+		xBack = 0;
+		cout << "cambiando!!!!!!!!! reseteo" << endl;
+	}
+	//cout << "xback " << xBack << endl;
 	//if (!avatar4->check) {
 		//avatar4->SetMoveY(-0.8f,elapsed);
 	//}

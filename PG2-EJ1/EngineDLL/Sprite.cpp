@@ -6,11 +6,7 @@ void Sprite::SetMyVertices(float* vertices) {
 	gvertices = new float[30];
 	gvertices =vertices;
 }
-void Sprite::PassingVerticesTileMap(float* vertices) {
-	gvertices = vertices;
-	int size = sizeof(float) * 30;
-	vertexBuffer = renderer->SetBufferData(gvertices, size);
-}
+
 void Sprite::Start() {
 	
 	/*{	
@@ -46,6 +42,63 @@ void Sprite::Start() {
 	cout << "height sprite " << heightSprite << endl;
 	SetPos(POS_MAP_X, POS_MAP_Y, 0);
 }
+void Sprite::SetMyBackgroundData(){
+	numberOfVertices = 4;
+	primitive = strip;
+	applyUv = true;
+	applyColor = false;
+	tam = 5;
+}
+void Sprite::SetBackGroundFrames(int x, int y ) {
+	int index = 0;
+	//cout << "width frame !!!!!!!!!!!!" << widthFrame<<endl;
+//	x = (int)(id % 3)*widthFrame;
+	
+	index += 3;
+	gvertices[index] = (float)x / data.width;//sup izq
+
+	index++;
+	gvertices[index]=1.0f - y / data.height;//izqu s
+	index += 4;
+	gvertices[index]=(float) (x + widthFrame) / data.width;// vertice sup derecho
+	index++;
+	gvertices[index] = 1.0f - y / data.height;//dere s
+	index += 4;
+	gvertices[index] =(float) x / data.width;//inf izq
+	index++;
+	gvertices[index]= 1.0f - (y + heightFrame) / data.height;//inf izqu
+	index += 4;
+	gvertices[index]=(float) (x + widthFrame) / data.width;//inf derecho
+	index++;
+	gvertices[index] = 1.0f - (y + heightFrame) / data.height;
+	
+	int size = sizeof(float) * 20;
+	vertexBuffer = renderer->SetBufferData(gvertices, size);
+}
+void Sprite::SetBackGroundVertices() {
+	gvertices = new float[20]
+	{
+	   -1.0f, 1.0f, 0.0f,
+
+	   0.0f, 1.0f,//uv esquina superior izquierda
+
+	   20.0f, 1.0f, 0.0f,
+
+	   1.0f, 1.0f,//uv esquina superior derecha
+
+	   -1.0f, -20.0f, 0.0f,
+
+	   0.0f, 0.0f,// uv esquina inferior izquierda
+
+	   20.0f, -20.0f, 0.0f,
+
+	   1.0f, 0.0f,//uv esquina inferior derecha
+	};
+	//int size = sizeof(float) * 20;
+	//vertexBuffer = renderer->SetBufferData(gvertices, size);
+
+}
+
 void Sprite::LoadBmp(const char* imagePath) {
 	DataBmp d=importBmp.LoadTexture(imagePath, renderer);
 	data.width = d.width;
@@ -58,13 +111,13 @@ void Sprite::LoadBmp(const char* imagePath) {
 	
 }
 void Sprite::SetFrameValues(){
-	widthFrame = 192;
-	heightFrame = 192;
+	widthFrame = 32;
+	heightFrame = 32;
 }
 void Sprite::SetFrame(int id) {
 	int index = 0;
-	x = (int)(id % 3)*widthFrame;
-	y = (int)(id / 3)*heightFrame;
+	x = (int)(id % 6)*widthFrame;
+	y = (int)(id / 6)*heightFrame;
 	
 	index += 3;
 	//vertice, esquina superior izquierda
@@ -108,6 +161,8 @@ void Sprite::SetFrame(int id) {
 	vertexBuffer = renderer->SetBufferData(gvertices, size);
 
 }
+
+
 Sprite::Sprite(Renderer* renderer):Shape(renderer) {
 
 

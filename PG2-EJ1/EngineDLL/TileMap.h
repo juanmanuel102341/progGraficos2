@@ -12,6 +12,7 @@ const int SIZE_TILE_MAP_X = 11;
 const int SIZE_TILE_MAP_Y = 10;
 const int PLAYER_ID = 1; 
 const int ENEMY_ID = 2;
+const int ASTEROID_ID = 3;
 struct DataTiles
 {
 	int idFrom;
@@ -34,13 +35,18 @@ public:
 public:
 	float* playerValues;
 	vector<float*>enemiesValues;
-	DataTiles dataPlayer;
+	vector<float*>asteroidsValues;
+
+	DataTiles* dataPlayer;
 	vector<DataTiles*> dataEnemies;
+	vector<DataTiles*> dataAsteroids;
 	float target;
 private:
 	void Set();
 	float* getEntityValues(int index_i,int index_c);
 	void SetNewObjects();
+	DataTiles* GenerateDataTiles(int index_i, int index_i2, int from, int to);
+
 	//float* NewEnemy(int i, int i2);
 private:
 	int sizeMap;

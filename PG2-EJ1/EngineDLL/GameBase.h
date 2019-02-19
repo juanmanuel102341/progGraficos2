@@ -1,6 +1,6 @@
 #pragma once
-#include"TypeDef.h"
-#include "Exports.h"
+//#include"TypeDef.h"
+//#include "Exports.h"
 #include "Renderer.h"
  #include <iostream>
 #include"Entity.h"
@@ -15,6 +15,7 @@
 #include<ctime>
 #include"Animation.h"
 #include"TileMap.h"
+#include"InputManager.h"
 class ENGINEDLL_API GameBase {
 
 protected:
@@ -23,6 +24,7 @@ protected:
 	Material* materialSprite;
 	ColisionManager* colisionManager;
 	Animation* animationManager;
+	InputManager* inputManager;
 	bool activateScrollX;
 private:
 	

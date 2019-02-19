@@ -1,0 +1,33 @@
+void Calc(){
+		int inicioFila=0;
+		int finFila=3;
+		int inicioColumna=0;
+		int finColumna=3;
+		for(int i1c=0;i1c<3;i1c++){
+			inicioFila=0;
+			for(int i1f=0;i1f<3;i1f++){
+
+				for(int ifila=inicioFila;ifila<finFila;ifila++){
+					print("index fila "+ifila);
+					print("index columna antes "+inicioColumna);
+					for(int icolumna=inicioColumna;icolumna<finColumna;icolumna++){
+
+						print("index columna"+icolumna);
+						print("fila "+manager.getCeldas[ifila].gameObject.name
+						);
+						GameObject obj=manager.getCeldas[ifila].gameObject.transform.GetChild(icolumna).gameObject;
+						print(" numero "+manager.getCeldas[ifila].transform.GetChild(icolumna).gameObject.GetComponent<Celda>().getNumero);
+						print("obj "+obj.name);
+					}
+					print("saliendo ffor columna fila "+ifila);
+					print("index columna des "+inicioColumna);
+				}
+				print("saliendo for fila i1f"+i1f);
+				inicioFila+=3;
+				finFila+=3;
+			}
+			print("saliendo fvor columna "+i1c);
+			inicioColumna+=3;
+			finColumna+=3;
+
+		}

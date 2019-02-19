@@ -12,5 +12,8 @@ void main()
 
 	// Output color = red 
 	fragColor=texture(myTextureSampler,textCoord).rgb;
+	if(fragColor.rgb==vec3(1.0,1.0,1.0)
+	discard;
+	
 
 }

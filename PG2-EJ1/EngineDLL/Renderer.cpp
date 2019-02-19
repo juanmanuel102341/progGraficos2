@@ -1,6 +1,6 @@
 #include "Renderer.h"
-#include"GL\glew.h"
-#include"GLFW\glfw3.h"
+//#include"GL\glew.h"
+//#include"GLFW\glfw3.h"
 
 
 Renderer::Renderer(Window* _window):moveCamera(0),mx(0){
@@ -44,7 +44,7 @@ bool Renderer::Start() {
 		glfwTerminate();
 		return false;
 	}
-
+	
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
 	matrizProyection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 100.0f);
@@ -102,12 +102,17 @@ unsigned int Renderer::SetBufferData(float vertices[],int size) {
 	 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
 	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	
+
+
 	 //cout << "id textire renderer "<<textureId<<endl;
 	 return textureId;
  
  }
 void Renderer::BindTexture(unsigned int idTexture) {
 	glBindTexture(GL_TEXTURE_2D, idTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
  }
 void Renderer::BeginDraw(int id) {
 	glEnableVertexAttribArray(id);
